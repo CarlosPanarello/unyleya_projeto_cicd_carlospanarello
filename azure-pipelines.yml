@@ -2,22 +2,20 @@
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-pool:
-  vmImage: 'ubuntu-latest'
-
+name : Docker-CI
 trigger:
 - main
-
-resources:
-- repo: self
-
+ 
+pool:
+  vmImage: 'ubuntu-latest'
+ 
 variables:
-  tag: '$(Build.BuildId)'
-
+  ImageName: 'carlospanarello:$(Build.BuildId)'
+ 
 stages:
 - stage: Build
   displayName: Build image
-  jobs:
+  jobs:  
   - job: Build
     displayName: Build and push Docker image
     steps:
@@ -27,3 +25,17 @@ stages:
         repository: 'unyleya-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker_Hub_Unyleya_Projects'
+        command: 'login'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker_Hub_Unyleya_Projects'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker_Hub_Unyleya_Projects'
+        repository: 'unyleya-devops'
+        command: 'push'
