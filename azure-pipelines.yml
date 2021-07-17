@@ -24,6 +24,6 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'Docker_Hub_Unyleya_Projects'
-        repository: 'Unyleya'
+        repository: 'unyleya-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
