@@ -27,5 +27,5 @@ stages:
         repository: 'panarello/unyleya-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: teste
+        tags: $(Build.BuildId)
 
