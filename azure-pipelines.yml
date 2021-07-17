@@ -26,8 +26,15 @@ stages:
         command: 'login'
     - task: Docker@2
       name: 'Docker_build'
+      displayName: Build an docker image 
       inputs:
         containerRegistry: 'Docker_Hub_Unyleya_Projects'
         command: 'build'
         Dockerfile: '**/Dockerfile'
-
+    - task: Docker@2
+      name: 'Docker_push'
+      displayName: Push docker image to docker hub
+      inputs:
+        containerRegistry: 'Docker_Hub_Unyleya_Projects'
+        repository: 'panarello/unyleya-devops'
+        command: 'push'
