@@ -28,8 +28,4 @@ stages:
         containerRegistry: 'Docker_Hub_Unyleya_Projects'
         command: 'build'
         Dockerfile: '**/Dockerfile'
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Docker_Hub_Unyleya_Projects'
-        repository: 'unyleya-devops'
-        command: 'push'
+
